@@ -66,13 +66,20 @@ with coluna_esquerda:
     st.plotly_chart(fig5, use_container_width=True)
 
 with coluna_direita:
-   st.subheader("📈 Percepção dos Colaboradores")
+  st.subheader("📈 Percepção dos Colaboradores")
+
+indicadores_grafico = [
+    'Satisfação<br>no trabalho',
+    'Conhecimento<br>de normas',
+    'Clareza das<br>atribuições',
+    'Infraestrutura/<br>equipamentos'
+]
 
 fig2 = go.Figure()
 
 fig2.add_trace(go.Bar(
     name='Notas 4 e 5',
-    x=indicadores,
+    x=indicadores_grafico,
     y=notas_4_5,
     marker_color='#2E8B57',
     text=[f'{valor}%' for valor in notas_4_5],
@@ -81,7 +88,7 @@ fig2.add_trace(go.Bar(
 
 fig2.add_trace(go.Bar(
     name='Nota 3',
-    x=indicadores,
+    x=indicadores_grafico,
     y=notas_3,
     marker_color='#F4A460',
     text=[f'{valor}%' for valor in notas_3],
@@ -90,7 +97,7 @@ fig2.add_trace(go.Bar(
 
 fig2.add_trace(go.Bar(
     name='Notas 1 e 2',
-    x=indicadores,
+    x=indicadores_grafico,
     y=notas_1_2,
     marker_color='#CD5C5C',
     text=[f'{valor}%' for valor in notas_1_2],
@@ -99,8 +106,26 @@ fig2.add_trace(go.Bar(
 
 fig2.update_layout(
     barmode='stack',
-    title='Notas 1 a 5 (Escala de Satisfação)',
-    legend_title_text='Notas',
+    title={
+        'text': 'Notas 1 a 5 (Escala de Satisfação)',
+        'x': 0.5,
+        'xanchor': 'center'
+    },
+    height=520,
+    margin=dict(
+        l=20,
+        r=20,
+        t=120,
+        b=110
+    ),
+    legend=dict(
+        title='Notas',
+        orientation='h',
+        x=0.5,
+        xanchor='center',
+        y=1.08,
+        yanchor='bottom'
+    ),
     yaxis=dict(
         title='Percentual',
         range=[0, 100],
@@ -108,11 +133,17 @@ fig2.update_layout(
     ),
     xaxis=dict(
         title='',
-        tickangle=-20
+        tickangle=0,
+        automargin=True,
+        tickfont=dict(size=11)
     )
 )
 
-st.plotly_chart(fig2, use_container_width=True)
+st.plotly_chart(
+    fig2,
+    use_container_width=True,
+    config={'responsive': True}
+)
 
 st.divider()
 
