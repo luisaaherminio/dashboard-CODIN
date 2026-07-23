@@ -1,6 +1,5 @@
 import streamlit as st
 import plotly.express as px
-import plotly.graph_objects as go  # Adicionado para corrigir o gráfico de barras
 
 # ================= Configuração da Página =================
 st.set_page_config(
@@ -67,35 +66,10 @@ with coluna_esquerda:
 
 with coluna_direita:
     st.subheader("📈 Percepção dos Colaboradores")
-    
-    # CORREÇÃO: Usando graph_objects para criar o gráfico de barras empilhadas
-    fig2 = go.Figure()
-    fig2.add_trace(go.Bar(
-        x=indicadores, 
-        y=notas_4_5, 
-        name='Nota 4 e 5', 
-        marker_color='#2E8B57'
-    ))
-    fig2.add_trace(go.Bar(
-        x=indicadores, 
-        y=notas_3, 
-        name='Nota 3', 
-        marker_color='#F4A460'
-    ))
-    fig2.add_trace(go.Bar(
-        x=indicadores, 
-        y=notas_1_2, 
-        name='Nota 1 e 2', 
-        marker_color='#CD5C5C'
-    ))
-
-    fig2.update_layout(
-        barmode='stack',
-        legend_title="Notas",
-        yaxis_title="Percentual",
-        xaxis_title="",
-        title="Notas 1 a 5 (Escala de Satisfação)"
-    )
+    fig2 = px.bar(x=indicadores, y=[notas_4_5, notas_3, notas_1_2], barmode='stack',
+                   title="Notas 1 a 5 (Escala de Satisfação)",
+                   color_discrete_map={'Nota 4 e 5': '#2E8B57', 'Nota 3': '#F4A460', 'Nota 1 e 2': '#CD5C5C'})
+    fig2.update_layout(legend_title="Notas", yaxis_title="Percentual", xaxis_title="")
     st.plotly_chart(fig2, use_container_width=True)
 
     st.subheader("💡 Avaliação Geral da Gestão")
