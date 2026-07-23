@@ -1,6 +1,6 @@
 import streamlit as st
 import plotly.express as px
-import plotly.graph_objects as go
+import plotly.graph_objects as go  # Adicionado para corrigir o gráfico de barras
 
 # ================= Configuração da Página =================
 st.set_page_config(
@@ -66,84 +66,41 @@ with coluna_esquerda:
     st.plotly_chart(fig5, use_container_width=True)
 
 with coluna_direita:
-  st.subheader("📈 Percepção dos Colaboradores")
+    st.subheader("📈 Percepção dos Colaboradores")
+    
+    # CORREÇÃO: Usando graph_objects para criar o gráfico de barras empilhadas
+    fig2 = go.Figure()
+    fig2.add_trace(go.Bar(
+        x=indicadores, 
+        y=notas_4_5, 
+        name='Nota 4 e 5', 
+        marker_color='#2E8B57'
+    ))
+    fig2.add_trace(go.Bar(
+        x=indicadores, 
+        y=notas_3, 
+        name='Nota 3', 
+        marker_color='#F4A460'
+    ))
+    fig2.add_trace(go.Bar(
+        x=indicadores, 
+        y=notas_1_2, 
+        name='Nota 1 e 2', 
+        marker_color='#CD5C5C'
+    ))
 
-indicadores_grafico = [
-    'Satisfação<br>no trabalho',
-    'Conhecimento<br>de normas',
-    'Clareza das<br>atribuições',
-    'Infraestrutura/<br>equipamentos'
-]
-
-fig2 = go.Figure()
-
-fig2.add_trace(go.Bar(
-    name='Notas 4 e 5',
-    x=indicadores_grafico,
-    y=notas_4_5,
-    marker_color='#2E8B57',
-    text=[f'{valor}%' for valor in notas_4_5],
-    textposition='inside'
-))
-
-fig2.add_trace(go.Bar(
-    name='Nota 3',
-    x=indicadores_grafico,
-    y=notas_3,
-    marker_color='#F4A460',
-    text=[f'{valor}%' for valor in notas_3],
-    textposition='inside'
-))
-
-fig2.add_trace(go.Bar(
-    name='Notas 1 e 2',
-    x=indicadores_grafico,
-    y=notas_1_2,
-    marker_color='#CD5C5C',
-    text=[f'{valor}%' for valor in notas_1_2],
-    textposition='inside'
-))
-
-fig2.update_layout(
-    barmode='stack',
-    title={
-        'text': 'Notas 1 a 5 (Escala de Satisfação)',
-        'x': 0.5,
-        'xanchor': 'center'
-    },
-    height=520,
-    margin=dict(
-        l=20,
-        r=20,
-        t=120,
-        b=110
-    ),
-    legend=dict(
-        title='Notas',
-        orientation='h',
-        x=0.5,
-        xanchor='center',
-        y=1.08,
-        yanchor='bottom'
-    ),
-    yaxis=dict(
-        title='Percentual',
-        range=[0, 100],
-        ticksuffix='%'
-    ),
-    xaxis=dict(
-        title='',
-        tickangle=0,
-        automargin=True,
-        tickfont=dict(size=11)
+    fig2.update_layout(
+        barmode='stack',
+        legend_title="Notas",
+        yaxis_title="Percentual",
+        xaxis_title="",
+        title="Notas 1 a 5 (Escala de Satisfação)"
     )
-)
+    st.plotly_chart(fig2, use_container_width=True)
 
-st.plotly_chart(
-    fig2,
-    use_container_width=True,
-    config={'responsive': True}
-)
+    st.subheader("💡 Avaliação Geral da Gestão")
+    fig6 = px.pie(names=cat_avaliacao, values=perc_avaliacao, hole=0.5)
+    st.plotly_chart(fig6, use_container_width=True)
 
 st.divider()
 
