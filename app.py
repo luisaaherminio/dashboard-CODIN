@@ -13,7 +13,7 @@ st.markdown("**Período:** 22/06/2026 a 07/07/2026 | **Relatório:** Portaria CO
 
 # ================= KPIs principais =================
 col1, col2, col3, col4 = st.columns(4)
-col1.metric("Unidades Avaliadas", "18 / 24", "75,0%")
+col1.metric("Unidades Avaliadas", "18 / 22", "75,0%")
 col2.metric("Respostas ao Formulário", "50", "Colaboradores")
 col3.metric("Atribuições Avaliadas", "226", "Total")
 col4.metric("Aderência A1/A2", "65,9%", "149 Atribuições")
