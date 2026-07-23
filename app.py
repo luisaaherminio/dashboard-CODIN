@@ -100,7 +100,7 @@ with col_risco2:
 with col_risco3:
     st.error("**R4 - Capacidade Institucional**\n\nLimitações de pessoal e ferramentas (46% nota intermediária).\n\n*Tratamento:* Direcionamento à alta administração.")
 
-st.warning("**Pendências (P1 e P2):** 6 unidades ainda não devolveram o levantamento (P1) e os Planos de Ação precisam de monitoramento trimestral (P2).")
+st.warning("**Pendências (P1 e P2):** 4 unidades ainda não devolveram o levantamento (P1) e os Planos de Ação precisam de monitoramento trimestral (P2).")
 
 st.markdown("---")
 st.caption("Fonte: Relatório Unificado de Diagnóstico Institucional - CODIN (Julho/2026) | Dashboard gerado via Streamlit")
