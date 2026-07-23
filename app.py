@@ -90,17 +90,17 @@ st.plotly_chart(fig3, use_container_width=True)
 st.divider()
 
 # Riscos e Pendências
-st.subheader("⚠️ Riscos e Pendências (Frentes F1/F2)")
+st.subheader("⚠️ Riscos e Pendências (Frentes F1 - Mobilização e Orientação e F2 - Mapeamento e Autoavaliação)")
 col_risco1, col_risco2, col_risco3 = st.columns(3)
 
 with col_risco1:
-    st.info("**R1 - Responsabilidade (Accountability)**\n\nDescolamento entre atribuições formais e práticas operacionais.\n\n*Tratamento:* Revisão normativa e rastreabilidade.")
+    st.info("**R1 - Responsabilidade (Accountability)**\n\nDescolamento entre atribuições formais e práticas operacionais.\n\n*Tratamento:* Rastreabilidade e Revisão Normativa.")
 with col_risco2:
-    st.warning("**R2 - Continuidade Operacional**\n\nDependência de conhecimento tácito e pessoas-chave.\n\n*Tratamento:* POPs e matriz de substituição.")
+    st.warning("**R2 - Continuidade Operacional**\n\nDependência de conhecimento tácito e pessoas-chave.\n\n*Tratamento:* POPs (Procedimento Operacional Padrão) e matriz de substituição.")
 with col_risco3:
     st.error("**R4 - Capacidade Institucional**\n\nLimitações de pessoal e ferramentas (46% nota intermediária).\n\n*Tratamento:* Direcionamento à alta administração.")
 
-st.warning("**Pendências (P1 e P2):** 4 unidades ainda não devolveram o levantamento (P1) e os Planos de Ação precisam de monitoramento trimestral (P2).")
+st.warning("**Pendências (P1 e P2):** 2 unidades ainda não devolveram o levantamento (P1) e os Planos de Ação precisam de monitoramento trimestral (P2).")
 
 st.markdown("---")
 st.caption("Fonte: Relatório Unificado de Diagnóstico Institucional - CODIN (Julho/2026) | Dashboard gerado via Streamlit")
