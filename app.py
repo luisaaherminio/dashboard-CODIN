@@ -1,5 +1,6 @@
 import streamlit as st
 import plotly.express as px
+import plotly.graph_objects as go
 
 # ================= Configuração da Página =================
 st.set_page_config(
@@ -65,16 +66,53 @@ with coluna_esquerda:
     st.plotly_chart(fig5, use_container_width=True)
 
 with coluna_direita:
-    st.subheader("📈 Percepção dos Colaboradores")
-    fig2 = px.bar(x=indicadores, y=[notas_4_5, notas_3, notas_1_2], barmode='stack',
-                   title="Notas 1 a 5 (Escala de Satisfação)",
-                   color_discrete_map={'Nota 4 e 5': '#2E8B57', 'Nota 3': '#F4A460', 'Nota 1 e 2': '#CD5C5C'})
-    fig2.update_layout(legend_title="Notas", yaxis_title="Percentual", xaxis_title="")
-    st.plotly_chart(fig2, use_container_width=True)
+   st.subheader("📈 Percepção dos Colaboradores")
 
-    st.subheader("💡 Avaliação Geral da Gestão")
-    fig6 = px.pie(names=cat_avaliacao, values=perc_avaliacao, hole=0.5)
-    st.plotly_chart(fig6, use_container_width=True)
+fig2 = go.Figure()
+
+fig2.add_trace(go.Bar(
+    name='Notas 4 e 5',
+    x=indicadores,
+    y=notas_4_5,
+    marker_color='#2E8B57',
+    text=[f'{valor}%' for valor in notas_4_5],
+    textposition='inside'
+))
+
+fig2.add_trace(go.Bar(
+    name='Nota 3',
+    x=indicadores,
+    y=notas_3,
+    marker_color='#F4A460',
+    text=[f'{valor}%' for valor in notas_3],
+    textposition='inside'
+))
+
+fig2.add_trace(go.Bar(
+    name='Notas 1 e 2',
+    x=indicadores,
+    y=notas_1_2,
+    marker_color='#CD5C5C',
+    text=[f'{valor}%' for valor in notas_1_2],
+    textposition='inside'
+))
+
+fig2.update_layout(
+    barmode='stack',
+    title='Notas 1 a 5 (Escala de Satisfação)',
+    legend_title_text='Notas',
+    yaxis=dict(
+        title='Percentual',
+        range=[0, 100],
+        ticksuffix='%'
+    ),
+    xaxis=dict(
+        title='',
+        tickangle=-20
+    )
+)
+
+st.plotly_chart(fig2, use_container_width=True)
 
 st.divider()
 
