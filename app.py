@@ -97,8 +97,5 @@ fig3.update_traces(texttemplate='%{text:.0f}%', textposition='outside')
 fig3.update_layout(xaxis_range=[0, 105], yaxis_title="", xaxis_title="Aderência (%)")
 st.plotly_chart(fig3, use_container_width=True)
 
-st.divider()
-
-
 st.markdown("---")
 st.caption("Fonte: Relatório Unificado de Diagnóstico Institucional - CODIN (Julho/2026) | Dashboard gerado via Streamlit")
