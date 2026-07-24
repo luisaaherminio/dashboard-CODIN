@@ -1,0 +1,199 @@
+import streamlit as st
+import plotly.express as px
+import plotly.graph_objects as go
+
+# ================= Configuração da Página e Tema =================
+st.set_page_config(
+    page_title="Painel CODIN 2026",
+    layout="wide",
+    initial_sidebar_state="expanded"
+)
+
+# CSS Customizado para Tema Escuro (Preto e Amarelo/Laranja)
+st.markdown("""
+<style>
+    /* Fundo geral escuro */
+    .stApp {
+        background-color: #121212;
+        color: #ffffff;
+    }
+    /* Barra lateral preta */
+    section[data-testid="stSidebar"] {
+        background-color: #000000 !important;
+    }
+    /* Títulos no Amarelo CODIN */
+    h1, h2, h3, h4, h5, h6 {
+        color: #F5C100 !important;
+        font-weight: 600;
+    }
+    /* Cards de métricas personalizados */
+    div[data-testid="stMetricValue"] {
+        color: #F5C100 !important;
+    }
+    div[data-testid="stMetricDelta"] {
+        color: #ffffff !important;
+    }
+    div[data-testid="stMetric"] {
+        background-color: #1e1e1e;
+        border-radius: 10px;
+        padding: 10px;
+        border: 1px solid #333333;
+    }
+    /* Linhas divisórias e textos */
+    hr {
+        border-color: #F5C100;
+    }
+    .stAlert {
+        background-color: #1e1e1e;
+        color: #ffffff;
+        border: 1px solid #F5C100;
+    }
+    /* Ajuste de containers */
+    .stMarkdown, .stText {
+        color: #e0e0e0;
+    }
+</style>
+""", unsafe_allow_html=True)
+
+# ================= Cabeçalho com Logos =================
+try:
+    col_logo, col_banner = st.columns([1, 5])
+    with col_logo:
+        st.image("logo.png", use_container_width=True)
+    with col_banner:
+        st.image("banner.png", use_container_width=True)
+except:
+    # Caso as imagens não estejam na pasta, exibe o título normal
+    st.title("📊 Painel de Diagnóstico Institucional - CODIN")
+    st.markdown("**Período:** 22/06/2026 a 07/07/2026 | **Relatório:** Portaria CODIN nº 102/2026")
+
+st.divider()
+
+# ================= KPIs principais =================
+col1, col2, col3, col4 = st.columns(4)
+col1.metric("Unidades Avaliadas", "18 / 22", "75,0%")
+col2.metric("Respostas ao Formulário", "50", "Colaboradores")
+col3.metric("Atribuições Avaliadas", "226", "Total")
+col4.metric("Aderência A1/A2", "65,9%", "149 Atribuições")
+
+st.divider()
+
+# ================= Dados para os Gráficos =================
+# 1. Classificação de Atribuições
+labels_classif = ['A1 Conforme', 'A2 Forma distinta', 'A3 Parcial', 'A4 Não executada', 'A5 Não se aplica']
+values_classif = [122, 27, 19, 42, 16]
+
+# 2. Percepção dos Colaboradores
+indicadores = ['Satisfação no trabalho', 'Conhecimento de normas', 'Clareza das atribuições', 'Infraestrutura/equipamentos']
+notas_4_5 = [88, 80, 96, 78]
+notas_3 = [8, 14, 3, 14]
+notas_1_2 = [4, 6, 1, 8]
+
+# 3. Aderência por Unidade
+unidades = [
+    'COMUNPRESI', 'DIVCONT', 'SUPFIN', 'SUPCIF', 'SUPVIF', 
+    'ASSJUR', 'ASSPRES', 'DIVFIN', 'DIVRHU', 
+    'SUPAD', 'SUPIN', 'ASSTIN', 'AGP',
+    'DIRAF', 'SUPDIN', 'DIRDI', 'DIRNN', 'DIRIF'
+]
+aderencia = [100, 100, 100, 100, 100, 92, 86, 86, 81, 74, 73, 64, 62, 36, 29, 25, 11, 11]
+classif_aderencia = ['Alta']*9 + ['Média']*4 + ['Baixa']*5
+
+# 4. Sinais Estruturais
+sinais = ['Regimento percebido como desatualizado', 'Atividade não formalizada', 'Sobreposição sem clareza', 'Função necessária ainda ausente']
+perc_sinais = [42, 34, 22, 30]
+
+# 5. Avaliação Geral
+cat_avaliacao = ['Excelente', 'Boa', 'Regular', 'Ruim']
+perc_avaliacao = [10, 48, 32, 10]
+
+# 6. Paleta de Cores do Tema (Amarelo, Laranja, Cinza)
+paleta_tema = ['#F5C100', '#FFAA00', '#FF8C00', '#E6A800', '#D48A00']
+
+# ================= Exibição dos Gráficos =================
+coluna_esquerda, coluna_direita = st.columns(2)
+
+with coluna_esquerda:
+    st.subheader("🔄 Distribuição das Classificações")
+    fig1 = px.pie(names=labels_classif, values=values_classif, hole=0.5, color_discrete_sequence=paleta_tema)
+    fig1.update_traces(textposition='inside', textinfo='percent+label', marker=dict(line=dict(color='#000000', width=2)))
+    fig1.update_layout(plot_bgcolor='#121212', paper_bgcolor='#121212', font=dict(color='#ffffff'))
+    st.plotly_chart(fig1, use_container_width=True)
+
+    st.subheader("📊 Sinais Estruturais Apontados")
+    fig5 = px.bar(x=perc_sinais, y=sinais, orientation='h', text=perc_sinais, color=perc_sinais, color_continuous_scale=['#D48A00', '#F5C100'])
+    fig5.update_traces(texttemplate='%{text:.0f}%', textposition='outside', marker=dict(line=dict(color='#000000', width=1)))
+    fig5.update_layout(yaxis_title="", xaxis_title="Percentual de Respondentes", plot_bgcolor='#121212', paper_bgcolor='#121212', font=dict(color='#ffffff'))
+    st.plotly_chart(fig5, use_container_width=True)
+
+with coluna_direita:
+    st.subheader("📈 Percepção dos Colaboradores")
+    
+    # CORREÇÃO: Usando graph_objects para o gráfico de barras empilhadas com cores do tema
+    fig2 = go.Figure()
+    fig2.add_trace(go.Bar(
+        x=indicadores, 
+        y=notas_4_5, 
+        name='Nota 4 e 5', 
+        marker_color='#F5C100' # Amarelo CODIN
+    ))
+    fig2.add_trace(go.Bar(
+        x=indicadores, 
+        y=notas_3, 
+        name='Nota 3', 
+        marker_color='#FF8C00' # Laranja
+    ))
+    fig2.add_trace(go.Bar(
+        x=indicadores, 
+        y=notas_1_2, 
+        name='Nota 1 e 2', 
+        marker_color='#B22222' # Vermelho Fogo (para dar contraste)
+    ))
+
+    fig2.update_layout(
+        barmode='stack',
+        legend_title="Notas",
+        yaxis_title="Percentual",
+        xaxis_title="",
+        title="Notas 1 a 5 (Escala de Satisfação)",
+        plot_bgcolor='#121212',
+        paper_bgcolor='#121212',
+        font=dict(color='#ffffff')
+    )
+    st.plotly_chart(fig2, use_container_width=True)
+
+    st.subheader("💡 Avaliação Geral da Gestão")
+    fig6 = px.pie(names=cat_avaliacao, values=perc_avaliacao, hole=0.5, color_discrete_sequence=paleta_tema)
+    fig6.update_traces(marker=dict(line=dict(color='#000000', width=2)))
+    fig6.update_layout(plot_bgcolor='#121212', paper_bgcolor='#121212', font=dict(color='#ffffff'))
+    st.plotly_chart(fig6, use_container_width=True)
+
+st.divider()
+
+# Aderência por Unidade (Gráfico de Barras Horizontal)
+st.subheader("📌 Aderência Formal Estimada por Unidade")
+fig3 = px.bar(x=aderencia, y=unidades, orientation='h', color=classif_aderencia,
+               color_discrete_map={'Alta': '#F5C100', 'Média': '#FF8C00', 'Baixa': '#B22222'},
+               text=aderencia)
+fig3.update_traces(texttemplate='%{text:.0f}%', textposition='outside')
+fig3.update_layout(xaxis_range=[0, 105], yaxis_title="", xaxis_title="Aderência (%)", 
+                   plot_bgcolor='#121212', paper_bgcolor='#121212', font=dict(color='#ffffff'))
+st.plotly_chart(fig3, use_container_width=True)
+
+st.divider()
+
+# Riscos e Pendências
+st.subheader("⚠️ Riscos e Pendências (Frentes F1 - Mobilização e Orientação e F2 - Mapeamento e Autoavaliação)")
+col_risco1, col_risco2, col_risco3 = st.columns(3)
+
+with col_risco1:
+    st.info("**R1 - Responsabilidade (Accountability)**\n\nDescolamento entre atribuições formais e práticas operacionais.\n\n*Tratamento:* Rastreabilidade e Revisão Normativa.")
+with col_risco2:
+    st.warning("**R2 - Continuidade Operacional**\n\nDependência de conhecimento tácito e pessoas-chave.\n\n*Tratamento:* POPs (Procedimento Operacional Padrão) e matriz de substituição.")
+with col_risco3:
+    st.error("**R4 - Capacidade Institucional**\n\nLimitações de pessoal e ferramentas (46% nota intermediária).\n\n*Tratamento:* Direcionamento à alta administração.")
+
+st.warning("**Pendências (P1 e P2):** 2 unidades ainda não devolveram o levantamento (P1) e os Planos de Ação precisam de monitoramento trimestral (P2).")
+
+st.markdown("---")
+st.caption("Fonte: Relatório Unificado de Diagnóstico Institucional - CODIN (Julho/2026) | Dashboard gerado via Streamlit | Tema Customizado")
