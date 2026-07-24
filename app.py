@@ -98,7 +98,7 @@ with col_risco1:
 with col_risco2:
     st.warning("**R2 - Continuidade Operacional**\n\nDependência de conhecimento tácito e pessoas-chave.\n\n*Tratamento:* POPs (Procedimento Operacional Padrão) e matriz de substituição.")
 with col_risco3:
-    st.error("**R4 - Capacidade Institucional**\n\nLimitações de pessoal e ferramentas (46% nota intermediária).\n\n*Tratamento:* Direcionamento à alta administração.")
+    st.error("**R4 - Capacidade Funcional**\n\nLimitações de pessoal e ferramentas (46% nota intermediária).\n\n*Tratamento:* Direcionamento à alta administração.")
 
 st.warning("**Pendências (P1 e P2):** 2 unidades ainda não devolveram o levantamento (P1) e os Planos de Ação precisam de monitoramento trimestral (P2).")
 
