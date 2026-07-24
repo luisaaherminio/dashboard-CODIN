@@ -54,12 +54,12 @@ perc_avaliacao = [10, 48, 32, 10]
 coluna_esquerda, coluna_direita = st.columns(2)
 
 with coluna_esquerda:
-    st.subheader("Distribuição das Classificações")
+    st.subheader("Distribuição das Classificações das Atribuições Praticadas na Companhia")
     fig1 = px.pie(names=labels_classif, values=values_classif, hole=0.5, color_discrete_sequence=px.colors.qualitative.Set2)
     fig1.update_traces(textposition='inside', textinfo='percent+label')
     st.plotly_chart(fig1, use_container_width=True)
 
-    st.subheader("Sinais Estruturais Apontados")
+    st.subheader("Sinais Organizacionais Apontados")
     fig5 = px.bar(x=perc_sinais, y=sinais, orientation='h', text=perc_sinais, color=perc_sinais, color_continuous_scale='Reds')
     fig5.update_traces(texttemplate='%{text:.0f}%', textposition='outside')
     fig5.update_layout(yaxis_title="", xaxis_title="Percentual de Respondentes")
@@ -82,7 +82,7 @@ with coluna_direita:
     st.plotly_chart(fig2, use_container_width=True)
     # -------------------------
 
-    st.subheader("Avaliação Geral da Gestão")
+    st.subheader("Avaliação Geral da Comunicação")
     fig6 = px.pie(names=cat_avaliacao, values=perc_avaliacao, hole=0.5)
     st.plotly_chart(fig6, use_container_width=True)
 
