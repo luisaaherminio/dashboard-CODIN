@@ -23,11 +23,11 @@ with col_titulo:
 # ================= GLOSSÁRIO (SANFONADO) =================
 with st.expander("Glossário e Abreviações"):
     st.markdown("""
-    - **A1 (Conforme)**: Atribuição executada exatamente conforme o normativo/regimento.
-    - **A2 (Forma distinta)**: Atribuição executada, porém com metodologia ou meio diferente do previsto.
-    - **A3 (Parcial)**: Atribuição executada parcialmente.
-    - **A4 (Não executada)**: Atribuição não realizada no período.
-    - **A5 (Não se aplica)**: Atribuição não pertinente à unidade no momento.
+    - **A1 (Conforme)**: A atribuição é executada em conformidade com o previsto na norma de referência, com os procedimentos, prazos e resultados esperados devidamente atendidos.
+    - **A2 (Forma distinta)**: A atribuição é executada, porém por meio de procedimento distinto do formalmente previsto, sem prejuízo do resultado final.
+    - **A3 (Parcial)**: A atribuição é executada, contudo os resultados obtidos não atendem, de forma integral, aos padrões e objetivos institucionalmente esperados.
+    - **A4 (Não executada)**: A atribuição não é executada, embora sua realização seja de responsabilidade formal da unidade ou cargo.
+    - **A5 (Não se aplica)**:  A atribuição não se aplica à unidade ou cargo avaliado, conforme a estrutura organizacional vigente.
     """)
 
 # ================= SÍNTESE EXECUTIVA =================
