@@ -34,7 +34,7 @@ with st.expander("Glossário"):
 st.markdown("---")
 st.info("""
     **Síntese Executiva:** 
-    Com 95,24% das unidades avaliadas e 226 atribuições mapeadas, a aderência geral (A1/A2) da companhia é de **65,9%** (149 atribuições). 
+    Com 95,24% das unidades avaliadas e 205 atribuições mapeadas, a aderência geral (A1 Conforme/A2 Forma distinta) da companhia é de **65,9%** (149 atribuições). 
     A percepção dos colaboradores se mantém positiva (88% de satisfação). No entanto, **3 unidades apresentam aderência crítica abaixo de 30%**, necessitando de atenção na formalização de processos.
 """)
 st.markdown("---")
