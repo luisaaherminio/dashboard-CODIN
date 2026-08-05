@@ -23,7 +23,6 @@ with col_titulo:
 # ================= GLOSSÁRIO (SANFONADO) =================
 with st.expander("Glossário e Abreviações"):
     st.markdown("""
-    - **CODIN**: Coordenadoria de Diagnóstico Institucional
     - **A1 (Conforme)**: Atribuição executada exatamente conforme o normativo/regimento.
     - **A2 (Forma distinta)**: Atribuição executada, porém com metodologia ou meio diferente do previsto.
     - **A3 (Parcial)**: Atribuição executada parcialmente.
