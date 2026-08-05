@@ -14,7 +14,7 @@ col_logo, col_titulo = st.columns([1, 5])  # Proporção de largura
 
 with col_logo:
     # Caso não tenha a imagem, o Streamlit exibe um quadrado vazio no lugar.
-    st.image("logo.png", width=120) 
+    st.image("logo.png", width=300) 
 
 with col_titulo:
     st.title("Painel de Diagnóstico Institucional - CODIN")
