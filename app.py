@@ -9,8 +9,36 @@ st.set_page_config(
     initial_sidebar_state="expanded"
 )
 
-st.title("Painel de Diagnóstico Institucional - CODIN")
-st.markdown("**Período:** 22/06/2026 a 07/07/2026 | **Relatório:** Portaria CODIN nº 102/2026")
+# ================= CABEÇALHO COM LOGO =================
+col_logo, col_titulo = st.columns([1, 5])  # Proporção de largura
+
+with col_logo:
+    # Caso não tenha a imagem, o Streamlit exibe um quadrado vazio no lugar.
+    st.image("logo.png", width=120) 
+
+with col_titulo:
+    st.title("Painel de Diagnóstico Institucional - CODIN")
+    st.markdown("**Período:** 22/06/2026 a 07/07/2026 | **Relatório:** Portaria CODIN nº 102/2026")
+
+# ================= GLOSSÁRIO (SANFONADO) =================
+with st.expander("Glossário e Abreviações"):
+    st.markdown("""
+    - **CODIN**: Coordenadoria de Diagnóstico Institucional
+    - **A1 (Conforme)**: Atribuição executada exatamente conforme o normativo/regimento.
+    - **A2 (Forma distinta)**: Atribuição executada, porém com metodologia ou meio diferente do previsto.
+    - **A3 (Parcial)**: Atribuição executada parcialmente.
+    - **A4 (Não executada)**: Atribuição não realizada no período.
+    - **A5 (Não se aplica)**: Atribuição não pertinente à unidade no momento.
+    """)
+
+# ================= SÍNTESE EXECUTIVA =================
+st.markdown("---")
+st.info("""
+    **Síntese Executiva:** 
+    Com 95,24% das unidades avaliadas e 226 atribuições mapeadas, a aderência geral (A1/A2) da companhia é de **65,9%** (149 atribuições). 
+    A percepção dos colaboradores se mantém positiva (88% de satisfação). No entanto, **3 unidades apresentam aderência crítica abaixo de 30%**, necessitando de intervenção imediata na formalização de processos.
+""")
+st.markdown("---")
 
 # ================= KPIs principais =================
 col1, col2, col3, col4 = st.columns(4)
@@ -54,21 +82,19 @@ perc_avaliacao = [10, 48, 32, 10]
 coluna_esquerda, coluna_direita = st.columns(2)
 
 with coluna_esquerda:
-    st.subheader("Distribuição das Classificações das Atribuições Praticadas na Companhia")
+    st.header("Distribuição das Classificações das Atribuições")
     fig1 = px.pie(names=labels_classif, values=values_classif, hole=0.5, color_discrete_sequence=px.colors.qualitative.Set2)
     fig1.update_traces(textposition='inside', textinfo='percent+label')
-    # CORREÇÃO APLICADA AQUI
     st.plotly_chart(fig1, width='stretch')
 
-    st.subheader("Sinais Organizacionais Apontados")
+    st.header("🚨 Sinais Organizacionais Apontados")
     fig5 = px.bar(x=perc_sinais, y=sinais, orientation='h', text=perc_sinais, color=perc_sinais, color_continuous_scale='Reds')
     fig5.update_traces(texttemplate='%{text:.0f}%', textposition='outside')
     fig5.update_layout(yaxis_title="", xaxis_title="Percentual de Respondentes")
-    # CORREÇÃO APLICADA AQUI
     st.plotly_chart(fig5, width='stretch')
 
 with coluna_direita:
-    st.subheader("Percepção dos Colaboradores")
+    st.header("Percepção dos Colaboradores")
     fig2 = go.Figure()
     fig2.add_trace(go.Bar(x=indicadores, y=notas_4_5, name='Nota 4 e 5', marker_color='#2E8B57'))
     fig2.add_trace(go.Bar(x=indicadores, y=notas_3, name='Nota 3', marker_color='#F4A460'))
@@ -80,24 +106,21 @@ with coluna_direita:
         xaxis_title="",
         legend_title="Notas"
     )
-    # CORREÇÃO APLICADA AQUI
     st.plotly_chart(fig2, width='stretch')
 
-    st.subheader("Avaliação Geral da Comunicação")
+    st.header("📢 Avaliação Geral da Comunicação")
     fig6 = px.pie(names=cat_avaliacao, values=perc_avaliacao, hole=0.5)
-    # CORREÇÃO APLICADA AQUI
     st.plotly_chart(fig6, width='stretch')
 
 st.divider()
 
 # Aderência por Unidade (Gráfico de Barras Horizontal)
-st.subheader("Aderência Formal Estimada por Unidade")
+st.header("Aderência Formal Estimada por Unidade")
 fig3 = px.bar(x=aderencia, y=unidades, orientation='h', color=classif_aderencia,
                color_discrete_map={'Alta': '#2E8B57', 'Média': '#DAA520', 'Baixa': '#CD5C5C'},
                text=aderencia)
 fig3.update_traces(texttemplate='%{text:.0f}%', textposition='outside')
 fig3.update_layout(xaxis_range=[0, 105], yaxis_title="", xaxis_title="Aderência (%)")
-# CORREÇÃO APLICADA AQUI
 st.plotly_chart(fig3, width='stretch')
 
 st.markdown("---")
