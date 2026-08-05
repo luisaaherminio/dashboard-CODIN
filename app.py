@@ -21,7 +21,7 @@ with col_titulo:
     st.markdown("**Período:** 22/06/2026 a 07/07/2026 | **Relatório:** Portaria CODIN nº 102/2026")
 
 # ================= GLOSSÁRIO (SANFONADO) =================
-with st.expander("Glossário e Abreviações"):
+with st.expander("Glossário"):
     st.markdown("""
     - **A1 (Conforme)**: A atribuição é executada em conformidade com o previsto na norma de referência, com os procedimentos, prazos e resultados esperados devidamente atendidos.
     - **A2 (Forma distinta)**: A atribuição é executada, porém por meio de procedimento distinto do formalmente previsto, sem prejuízo do resultado final.
