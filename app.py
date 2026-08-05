@@ -35,7 +35,7 @@ st.markdown("---")
 st.info("""
     **Síntese Executiva:** 
     Com 95,24% das unidades avaliadas e 226 atribuições mapeadas, a aderência geral (A1/A2) da companhia é de **65,9%** (149 atribuições). 
-    A percepção dos colaboradores se mantém positiva (88% de satisfação). No entanto, **3 unidades apresentam aderência crítica abaixo de 30%**, necessitando de intervenção imediata na formalização de processos.
+    A percepção dos colaboradores se mantém positiva (88% de satisfação). No entanto, **3 unidades apresentam aderência crítica abaixo de 30%**, necessitando de atenção na formalização de processos.
 """)
 st.markdown("---")
 
@@ -86,7 +86,7 @@ with coluna_esquerda:
     fig1.update_traces(textposition='inside', textinfo='percent+label')
     st.plotly_chart(fig1, width='stretch')
 
-    st.header("🚨 Sinais Organizacionais Apontados")
+    st.header("Sinais Organizacionais Apontados")
     fig5 = px.bar(x=perc_sinais, y=sinais, orientation='h', text=perc_sinais, color=perc_sinais, color_continuous_scale='Reds')
     fig5.update_traces(texttemplate='%{text:.0f}%', textposition='outside')
     fig5.update_layout(yaxis_title="", xaxis_title="Percentual de Respondentes")
@@ -107,7 +107,7 @@ with coluna_direita:
     )
     st.plotly_chart(fig2, width='stretch')
 
-    st.header("📢 Avaliação Geral da Comunicação")
+    st.header("Avaliação Geral da Comunicação")
     fig6 = px.pie(names=cat_avaliacao, values=perc_avaliacao, hole=0.5)
     st.plotly_chart(fig6, width='stretch')
 
