@@ -1,0 +1,23 @@
+name: Manter Streamlit ativo
+
+on:
+  schedule:
+    # Executa a cada 6 horas (horário UTC).
+    - cron: "0 */6 * * *"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  manter-ativo:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+
+    steps:
+      - name: Acessar o aplicativo Streamlit
+        run: |
+          curl --fail --silent --show-error --location \
+            --retry 3 --retry-delay 10 --max-time 60 \
+            "https://dashboard-codin.streamlit.app/" \
+            > /dev/null
